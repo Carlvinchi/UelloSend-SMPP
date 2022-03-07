@@ -1,0 +1,33 @@
+express
+smpp
+dotenv
+
+fucntions
+schedule_delivery_time | for scheduling message
+
+registered_delivery | if delivery receipt is required
+
+data_coding | for the right enconding scheme
+
+user_message_reference | to identify user specific messages
+
+
+submit_multi | used to send messages to multiple recipients
+
+number_of_dests | number of destination addresses 
+
+destination_flag | 1- SME address
+
+max_address = 250
+
+querry_sm | used to querry messages for their status (message_id and source_addr)
+
+message_state | status of the message
+
+error_code | reason message not delivered
+
+final_date
+
+
+dest_address parameter in submit_multi operation must be an array of objects 
+containing either dest_addr_ton, dest_addr_npi and, destination_addr properties

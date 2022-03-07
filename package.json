@@ -1,0 +1,21 @@
+{
+  "name": "uellosend_smpp",
+  "version": "1.0.0",
+  "description": "This is for uellosend using smpp",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "UelloSend",
+    "SMS"
+  ],
+  "author": "CAB",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "smpp": "^0.6.0-rc.2"
+  }
+}
