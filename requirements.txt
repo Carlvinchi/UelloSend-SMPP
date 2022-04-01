@@ -31,3 +31,24 @@ final_date
 
 dest_address parameter in submit_multi operation must be an array of objects 
 containing either dest_addr_ton, dest_addr_npi and, destination_addr properties
+
+pm2 ecosystem simple
+
+pm2 start ecosystem.config.js --env production
+
+pm2 monit , to monitor resource usage
+
+-l --log [path]              specify filepath to output both out and error logs
+
+$ NODE_ENV=production pm2 restart web-interface --update-env
+
+pm2 start ecosystem.config.js -l --log "../logs/combined.log" 
+pm2 start "./config/ecosystem.config.js" -l --log "./logs/combined.log"
+
+npm install @logtail/node @logtail/winston
+
+pm2 link 2myehtv1arrcypm 9wpb775w3ygl73r
+
+ pm2 link delete
+
+ npm install -g pm2

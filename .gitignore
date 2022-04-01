@@ -1,2 +1,7 @@
 /node_modules
 .env
+/logs
+cheat_sheet_PM2.txt
+linux_sheet.txt
+fakeConn.js
+requirements.txt

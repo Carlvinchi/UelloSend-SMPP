@@ -14,6 +14,6 @@ router.post('/singlesms',single_message);
 router.post('/multisms',multi_message);
 router.post('/single-schedule',schedule_single_message);
 router.post('/multi-schedule',schedule_multi_message);
-router.get('/query/:',query_sms);
+router.route('/query').get(query_sms);
 
 module.exports = router

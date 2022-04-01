@@ -1,4 +1,5 @@
-const session = require('./connectController');
+//const session = require('./fakeConn');
+const {session, lookupPDUStatusKey} = require('./connectController');
 
 const send_multi_message = async(req,res)=>{
 
@@ -9,9 +10,14 @@ const send_multi_message = async(req,res)=>{
         number_of_dests: 1,
         dest_address: [{
             dest_flag: 1,
-            destination_addr: recipient
+               dest_addr_ton: 1,
+               dest_addr_npi: 1,
+               destination_addr: recipient
+        
+
         }],// must be an array of objects
         short_message: message,
+        data_coding: 1,
         registered_delivery: 1,
         user_message_reference: reference
     }, (pdu)=> {
