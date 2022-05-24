@@ -1,23 +1,9 @@
 const Receipt = require('../model/Receipts');
 
-const resp = async(req,res)=>{
-    console.log(req.body);
-    return  res.status(200).json({
-        data: req.body
-});
-}
-
-const query_resp = async(req,res)=>{
-    console.log(req.query);
-    return  res.status(200).json({
-        data: req.query
-});
-}
 
 const createReceipt =  async(req, res) =>{
 
     var today = new Date();
-    
     var dd = today.getDate();
     
     var mm = today.getMonth()+1; 
@@ -39,7 +25,7 @@ const createReceipt =  async(req, res) =>{
            const receipt = await Receipt.create({
             message_id: req.body.message_id,
             recipient: req.body.source_addr,
-            sender_id: req.body.sender_id,
+            sender_id: req.body.destination_addr,
             submit_date: req.body.submit_date,
             done_date: req.body.done_date,
             delivery_status: req.body.delivery_status,
@@ -62,19 +48,6 @@ const getReceipt = async(req,res ) =>{
         const receipt = await Receipt.find({
             message_id: req.query.message_id,
             sender_id: req.query.sender_id
-        });
-
-        return res.status(200).json({receipt});
-    } catch (error) {
-        return  res.status(500).json({msg: error});
-    }
-    
-}
-
-const getReceiptss = async(req,res ) =>{
-    try {
-        const receipt = await Receipt.find({
-           entry_date: { $gte: req.query.date1, $lte: req.query.date2 }
         });
 
         return res.status(200).json({receipt});
@@ -119,5 +92,12 @@ const deleteManyReceipt = async(req,res ) =>{
     }
 }
 
+/*
+location /api {
+    rewrite ^\/api\/(.*)$ /api/$1 break;
+    proxy_pass http://localhost:5000;
+}
+*/
 
-module.exports = {resp, query_resp,createReceipt,getReceipt,deleteReceipt,deleteManyReceipt,getAllReceipt};
+
+module.exports = {createReceipt,getReceipt,deleteReceipt,deleteManyReceipt,getAllReceipt};

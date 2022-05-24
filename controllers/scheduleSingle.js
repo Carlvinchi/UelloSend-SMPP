@@ -1,5 +1,6 @@
-//const {session, lookupPDUStatusKey}= require('./fakeConn');
-const {session, lookupPDUStatusKey} = require('./connectController');
+const {session, lookupPDUStatusKey}= require('./fakeConn');
+//const {session, lookupPDUStatusKey} = require('./connectController');
+const logger = require('./logger');
 
 const schedule_single_message = async(req,res)=>{
 

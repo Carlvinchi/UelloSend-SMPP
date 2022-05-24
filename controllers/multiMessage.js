@@ -1,6 +1,6 @@
-//const session = require('./fakeConn');
-const {session, lookupPDUStatusKey} = require('./connectController');
-
+const session = require('./fakeConn');
+//const {session, lookupPDUStatusKey} = require('./connectController');
+const logger = require('./logger');
 const send_multi_message = async(req,res)=>{
 
   const  {sender_id, message, recipient, reference} = req.body;

@@ -1,0 +1,42 @@
+cd ~  # go to home directory
+
+sudo tcpdump -i any -w schedule_sm_dump.pcap port 3010 // create a pcap file of the connection
+
+sudo reboot // restart server
+
+uname -m # check linux architecture
+
+lsb_release -a # check linux version
+
+#release ip tables
+sudo iptables -P INPUT ACCEPT && sudo iptables -P OUTPUT ACCEPT && sudo iptables -P FORWARD ACCEPT && sudo iptables -F
+
+sudo netstat -nptl #view tasks all
+
+sudo ps aux | grep PM2 #view PM2 Task
+
+kill -9 PID #Kill Process
+
+echo "PATH=\$PATH:/home/ubuntu/pm2/bin" >> ~/.bashrc # adding content bashrc
+
+export PATH=$PATH:/home/ubuntu/pm2/bin # adding path to the system
+
+sudo env PATH=$PATH:/usr/bin /home/ubuntu/pm2/bin/pm2 startup systemd -u ubuntu --hp /home/ubuntu # adding path to env 
+
+sudo systemctl status pm2-ubuntu # check the status of a service
+
+sudo systemctl start pm2-ubuntu # start a service
+
+sudo systemctl list-units # Check if pm2-<USER> service has been added
+
+journalctl -u pm2-<USER> # Check logs
+
+systemctl cat pm2-<USER> # open systemd configuration file
+
+stream {
+    log_format tcp_format '$time_local|$remote_addr|$protocol|$status|$bytes_sent|$bytes_received|$session_time|$upstream_addr|$upstream_bytes_sent|$upstream_bytes_received|$upstream_connect_time';
+
+    access_log /www/wwwlogs/tcp-access.log tcp_format;
+    error_log /www/wwwlogs/tcp-error.log;
+    include /www/server/panel/vhost/nginx/tcp/*.conf;
+}

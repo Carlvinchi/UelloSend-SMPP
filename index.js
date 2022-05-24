@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
+const connectDB = require('./db/connect')
+
 const homeRouter = require('./routes/homeRouter');
 
 
@@ -26,12 +28,12 @@ const port = process.env.PORT || 3500;
 
 const start = async () => {
     try {
-        
-        app.listen(port, logger.info(`Server is running on port ${port}...`,
-        {
-            operation: 'Starting the server'
-        }
-        ));
+             connectDB(process.env.MONGO_URI)
+            app.listen(port, logger.info(`Server is running on port ${port}...`,
+            {
+                operation: 'Starting the server'
+            }
+            ));
 
     } catch (error) {
         logger.error(error,{

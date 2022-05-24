@@ -1,5 +1,5 @@
-//const {session, lookupPDUStatusKey} = require('./fakeConn');
-const {session, lookupPDUStatusKey} = require('./connectController');
+const {session, lookupPDUStatusKey} = require('./fakeConn');
+//const {session, lookupPDUStatusKey} = require('./connectController');
 const logger = require('./logger');
 const query_sms = async(req,res)=>{
 
