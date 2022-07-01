@@ -20,7 +20,9 @@ const query_sms = async(req,res)=>{
             return  res.status(200).json({
                 data: {
                   message_id: pdu.message_id,
-                  status_message: status_msg
+                  status_message: status_msg,
+                  delivery_status: pdu.message_state,
+                  error_status: pdu.error_code
               }
            });
         }
@@ -32,7 +34,7 @@ const query_sms = async(req,res)=>{
           });
           return  res.status(400).json({
               data: {
-                pdu_data: pdu,
+                
                 status_message: status_msg
              }
         });
