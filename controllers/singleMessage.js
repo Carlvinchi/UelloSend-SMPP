@@ -7,7 +7,9 @@ const send_single_message = async(req,res)=>{
     session.submit_sm({
         source_addr: sender_id,
         destination_addr: recipient,
-        short_message: message,
+        message_payload: message,
+        sm_length: 0,
+        data_coding:0,
         registered_delivery: 1,
         user_message_reference: reference
     }, (pdu)=> {

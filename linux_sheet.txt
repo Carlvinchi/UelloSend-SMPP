@@ -1,6 +1,6 @@
 cd ~  # go to home directory
 
-sudo tcpdump -i any -w schedule_sm_dump.pcap port 3010 // create a pcap file of the connection
+sudo tcpdump -i any -w sms_trace_2.pcap port 3010 // create a pcap file of the connection
 
 sudo reboot // restart server
 
