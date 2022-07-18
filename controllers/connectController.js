@@ -2,6 +2,11 @@ const smpp = require('smpp');
 const Receipt = require('../model/Receipts');
 require('dotenv').config();
 const logger = require('./logger');
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+
+const fetch = require('node-fetch');
+const axios = require('axios');
+
 
 const session = new smpp.Session({
   host: process.env.HOST1, 
@@ -91,6 +96,27 @@ const binder = ()=>{
           entry_date: today
         }
        createReceipt(payload);
+
+       axios({
+        method: 'GET',
+        url: `https://uellosend.com/web/smpp_delivery_receipt.php?delivery_status=${delivery_status}&message_id=${message_id}&error_code=${error_code}`,
+        
+      })
+      .then(function (response) {
+        
+      })
+      .catch(function (error) {
+        
+      });
+
+      const delivery_url =  `https://uellosend.com/web/smpp_delivery_receipt.php?delivery_status=${delivery_status}&message_id=${message_id}&error_code=${error_code}`;
+
+          const options = {
+            "method": "GET"
+          };
+
+      const response = fetch(delivery_url, options);
+
       session.send(pdu.response());
     }
     else if (pdu.command == 'data_sm'){
