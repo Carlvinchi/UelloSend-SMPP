@@ -57,6 +57,7 @@
  console.log(delivery_status);
  console.log(error_code);
  */
+
       // var today = new Date("2022-04-28") ;
       // console.log(today);
       // today.setDate(today.getDate() - 90);
@@ -90,10 +91,44 @@
       // }
       // demo();
 
-
+      //220608155501+
+      //yymmddhhmmss+
       var d = "30-04-2022 08:51 PM";
       
-      function dateProcessor(my_date_time) {
+  //     function dateProcessor(my_date_time) {
+
+  //       var time = my_date_time.substr(-8,8); // extract the time portion of the date
+        
+  //       var hours = parseInt(time.substr(0, 2)); // extract the hours part of the time
+  //       if(time.indexOf('AM') != -1 && hours == 12) {
+  //           time = time.replace('12', '00');
+  //       }
+  //       if(time.indexOf('PM')  != -1 && hours < 12) {
+  //           time = time.replace(hours, (hours + 12));
+  //       }
+  //       time = time.replace(/(AM|PM)/, '');
+        
+  //       var my_date =  my_date_time.substr(0,10); // extract the date part of the datetime object
+        
+  //       my_date = my_date.split("-").reverse().join("-"); // split and reverse the date and then join 
+        
+  //       var final_date_time = my_date+' '+time;
+        
+  //       var my_new_date = new Date(final_date_time);
+  //       var get_milliseconds = my_new_date.getTime();
+
+  //       var current_date = Date.now();
+        
+  //       var ms_seconds = get_milliseconds -current_date;
+  //       return ms_seconds;
+  //   }
+
+  //  dateProcessor(d);
+        //220608155501+
+       //yymmddhhmmss+
+       var d = "19-07-2022 12:10 PM";
+
+    async  function dateProcessor(my_date_time) {
 
         var time = my_date_time.substr(-8,8); // extract the time portion of the date
         
@@ -102,23 +137,39 @@
             time = time.replace('12', '00');
         }
         if(time.indexOf('PM')  != -1 && hours < 12) {
+
+          if(time.startsWith('0')){
+            time = time.slice(1);
+          }
             time = time.replace(hours, (hours + 12));
         }
         time = time.replace(/(AM|PM)/, '');
         
         var my_date =  my_date_time.substr(0,10); // extract the date part of the datetime object
+
+       
         
         my_date = my_date.split("-").reverse().join("-"); // split and reverse the date and then join 
-        
-        var final_date_time = my_date+' '+time;
-        
-        var my_new_date = new Date(final_date_time);
-        var get_milliseconds = my_new_date.getTime();
+        console.log('this is date '+my_date);
+        console.log('this is time '+time);
 
-        var current_date = Date.now();
+        my_date = my_date.split('-').join('');
+        my_date = my_date.slice(2);
+
+        time = time.split(':').join('');
+        time = time+"01+";
+        time = time.split(' ').join(''); 
+
+
+        console.log('this is smpp date '+my_date);
+        console.log('this is smpp time '+time);
+
+
+        var final_date_time = my_date+''+time;
+        final_date_time = final_date_time.trim();
+        console.log('this is final date '+final_date_time);
         
-        var ms_seconds = get_milliseconds -current_date;
-        return ms_seconds;
+        return final_date_time;
     }
 
-   dateProcessor(d);
+    dateProcessor(d);

@@ -5,11 +5,12 @@ const logger = require('./logger');
 const schedule_single_message = async(req,res)=>{
 
   const  {sender_id, message, recipient, reference, date} = req.body;
+    const smpp_date = await create_SMPP_date_format(date);
     session.submit_sm({
         source_addr: sender_id,
         destination_addr: recipient,
         short_message: message,
-        schedule_delivery_time: date, //YYMMDDhhmmss, note hh = 00-23
+        schedule_delivery_time: smpp_date, //YYMMDDhhmmss, note hh = 00-23
         registered_delivery: 1,
         user_message_reference: reference
     }, (pdu)=> {
@@ -43,5 +44,43 @@ const schedule_single_message = async(req,res)=>{
     });
 
 }
+
+
+const create_SMPP_date_format = async(my_date_time)=>{
+
+  var time = my_date_time.substr(-8,8); // extract the time portion of the date
+  
+  var hours = parseInt(time.substr(0, 2)); // extract the hours part of the time
+  if(time.indexOf('AM') != -1 && hours == 12) {
+      time = time.replace('12', '00');
+  }
+  if(time.indexOf('PM')  != -1 && hours < 12) {
+
+    if(time.startsWith('0')){
+      time = time.slice(1);
+    }
+      time = time.replace(hours, (hours + 12));
+  }
+  time = time.replace(/(AM|PM)/, '');
+  
+  var my_date =  my_date_time.substr(0,10); // extract the date part of the datetime object
+
+  
+  my_date = my_date.split("-").reverse().join("-"); // split and reverse the date and then join 
+
+
+  my_date = my_date.split('-').join('');
+  my_date = my_date.slice(2);
+
+  time = time.split(':').join('');
+  time = time+"01+";
+  time = time.split(' ').join(''); 
+
+  var final_date_time = my_date+''+time;
+  final_date_time = final_date_time.trim();
+  
+  return final_date_time;
+};
+
 
 module.exports = schedule_single_message;
