@@ -27,3 +27,5 @@ run pm2 start index // run server
 run pm2 stop all // stop server
 
 ENJOY---> CARLVINCHI
+
+More info here https://github.com/farhadi/node-smpp
